@@ -1,0 +1,765 @@
+---
+title: "統計軟體與繪圖"
+author: "H44074039范馨予"
+date: "2020/5/1"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# 基本數學運算
+```{r cars}
+#次方
+5^3 
+#次方
+5**3
+#平方根
+sqrt(4)
+#絕對值
+abs(-10)
+#取餘數
+5%%3  
+#取整數位
+5%/%3
+#自然數的(次方)
+exp(2)
+#以10為底的對數值
+log(2,10)
+#以2為底的對數值
+log(2,2)
+#x四捨五入到小數點第k位(僅含小數部分),round(x,k)
+round(98.562,1)
+#x四捨五入到左邊數來第k位(含整數部分),signif(x,k)
+signif(79843.597,3)
+#階乘,factorial(x)
+factorial(5)
+```
+
+
+# 向量物件函數
+```{r chair}
+#x到y的數列以z為等差,seq(x,y,z)
+seq(1,9,2)
+#x到y數列等分z等分,seq(x,y,length.out=z)
+seq(1,9,length.out=6)
+#重複向量物件,rep(x,times=重複次數,each=每次每個元素重複次數,length.out=向量長度)
+rep(1:2,2)
+rep(1:3,times=3,each=2)
+rep(1:3,each=2,length.out=8)
+
+```
+
+
+# 數學運算函數
+#### x<-c(7,8,6,11,9,12)
+```{r see,include=FALSE}
+x<-c(7,8,6,11,9,12)
+```
+```{r saa}
+#x數列總和
+sum(x)
+#x數列最大值
+max(x)
+#x數列最小值
+min(x)
+#x數列平均值
+mean(x)
+#計算元素積
+prod(x)
+#計算元素的累積和
+cumsum(x)
+#計算元素的累積積
+cumprod(x)
+#元素從向量起點到該元素位置所有元素的最大值
+cummax(x)
+#元素從向量起點到該元素位置所有元素的最小值
+cummin(x)
+#排序,從小排到大,sort(x)
+sort(x)
+#排序,從大牌到小,sort(x,decreasing=TRUE)
+sort(x,decreasing=TRUE)
+#排序位置,數列中由小排到大的元素位置,rank(x)
+rank(x)
+#向量顛倒排序
+rev(x)
+#樣本標準差
+sd(x)
+#樣本變異數
+var(x)
+```
+
+# 數學運算函數(含缺失值)
+### !diff()函數和累積函數不適用!
+#### y<-c(9,7,11,NA,1)
+```{r sa,include=FALSE}
+y<-c(9,7,11,NA,1)
+```
+```{r da}
+#最大值
+max(y,na.rm=TRUE)
+#最小值
+min(y,na.rm=TRUE)
+#總和
+sum(y,na.rm=TRUE)
+#後項和前項差距(不適用)
+diff(y)
+#元素從向量起點到該元素位置所有元素的最大值(不適用)
+cummax(y)
+```
+
+# 物件長度
+#### h<-c("Hello world")
+#### h1<-c("H","e","l","l","o")
+#### h2<-c("Hello","world")
+```{r ga,include=FALSE}
+h<-c("Hello world")
+h1<-c("H","e","l","l","o")
+h2<-c("Hello","world")
+```
+```{r ha}
+#h向量物件的長度
+length(h)
+#h1向量物件的長度
+length(h1)
+#h2向量物件的長度
+length(h2)
+#h物件內各含有多少字元
+nchar(h)
+#h1物件內各含有多少字元
+nchar(h1)
+#h2物件內各含有多少字元
+nchar(h2)
+```
+
+# 物件屬性
+#### x1<-c(1:5)
+#### x2<-c(1.5,2)
+#### x3<-c("hello")
+```{r ja,include=FALSE}
+x1<-c(1:5)
+x2<-c(1.5,1,5)
+x3<-c("hello")
+```
+```{r ta}
+#是否整數
+is.integer(x1)
+is.integer(x2)
+is.integer(x3)
+#是否數字
+is.numeric(x1)
+is.numeric(x2)
+is.numeric(x3)
+#是否雙倍精確實數
+is.double(x1)
+is.double(x2)
+is.double(x3)
+#是否字串
+is.character(x1)
+is.character(x2)
+is.character(x3)
+#了解資料類型,class(x)
+class(x1)
+```
+
+# 物件元素的存取
+#### numeric_list<-25:1
+```{r ia,include=FALSE}
+numeric_list<-10:1
+```
+```{r oa}
+numeric_list
+#備份原始資料
+copynum<-numeric_list
+copynum
+#取第x位資料,numeric_list[x]
+numeric_list[2]
+#取多筆資料
+numeric_list[c(2,5,10)]
+#把第x位元素拿掉,numeric_list[-x]
+numeric_list[-2]
+#把第x到y的元素拿掉,numeric_list[-(x:y)]
+numeric_list[-(1:9)]
+#把第x位的向量拿掉,存成新的向量
+newlist<-numeric_list[-2]
+newlist
+#修改向量物件元素值
+numeric_list[c(2,4)]<-c(1,5)
+numeric_list
+#print出資料原始值
+copynum
+```
+
+
+# 邏輯向量
+#### score.a<-c(12,8,9,15,7,12)
+#### score.b<-c(7,8,6,11,9,12)
+```{r ka,include=FALSE}
+score.a<-c(12,8,9,15,7,12)
+score.b<-c(7,8,6,11,9,12)
+```
+```{r la}
+#回傳最大值(TRUE)的位置
+which.max(score.a)
+#回傳a比b分數高(TRUE)的位置
+bestscore<-score.a>score.b
+which(bestscore)
+#回傳a分數大於8的元素
+score.a[score.a>8]
+#回傳a分數大於8的位置
+which(score.a>8)
+```
+
+
+# 矩陣
+#### matrix(data,nrow=?,ncol=?,byrow=logical)
+#### byrow預設為FALSE若byrow=TRUE則由左至右依序將資料先填滿第一列再填第二列
+```{r mat}
+#建立矩陣(以行排序)
+onematrix<-matrix(1:12,nrow=4)
+onematrix
+#建立矩陣(以列排序)
+twomatrix<-matrix(1:12,nrow=4,byrow=TRUE)
+twomatrix
+#認識矩陣的屬性,str()
+str(onematrix)
+str(twomatrix)
+#看矩陣列數,nrow()
+nrow(onematrix)
+#看矩陣行數,ncol()
+ncol(twomatrix)
+#看矩陣列數和行數,dim()
+dim(onematrix)
+#矩陣的元素個數,length()
+length(onematrix)
+#檢查是否矩陣,is.matrix()
+is.matrix(twomatrix)
+```
+```{r ya,include=FALSE}
+
+```
+```{r ua}
+#將向量轉成矩陣,依列來排rbind(),依行來排cbind()
+v1<-c(7,11,15)
+v2<-c(5,10,9)
+a1<-rbind(v1,v2)
+a1
+b1<-cbind(v1,v2)
+b1
+#矩陣和向量組成矩陣
+v3<-c(3,6,12)
+a2<-rbind(a1,v3)
+a2
+b2<-cbind(b1,v3)
+b2
+#取得矩陣元素值,matrix[列,行]
+b2[3,]
+b2[,2]
+b2[1,2]
+b2[1:2,2:3]
+#取得&修改矩陣的列名和欄名,rownames()、colnames()
+#修改
+rownames(b2)<-c("小明","小華","小鐘")
+b2
+colnames(b2)<-c("firstscore","secondscore","thirdscore")
+b2
+#取得
+rownames(b2)
+colnames(b2)
+dimnames(b2)
+#找出三位分別的對應成績
+b2["小明","firstscore"]
+b2["小鐘","secondscore"]
+```
+# 矩陣的運算
+#### am<-matrix(1:9,nrow=3)
+```{r,include=FALSE}
+am<-matrix(1:9,nrow=3)
+am
+```
+```{r}
+#計算三人分別總分
+rowSums(b2)
+#計算三人分別平均
+rowMeans(b2)
+#轉置矩陣,t()
+t(b2)
+#矩陣相除
+am%/%am
+#矩陣相乘
+am%*%am
+#矩陣對角線之向量值,diag()
+diag(b2)
+#反矩陣,solve()
+solve(b2)
+#行列式值,det()
+det(b2)
+```
+
+
+# 陣列
+```{r}
+#建立陣列,array(data,dim=c(列,行,矩陣個數))
+ar1<-array(1:24,dim=c(3,4,2))
+ar1
+# 後來用dim重建陣列組
+ar2<-1:24
+dim(ar2)<-c(4,3,2)
+ar2
+#比較兩物件是否完全相同,indentical()
+identical(ar1,ar2)
+```
+
+
+# 因子
+```{r}
+#看資料有哪些類別,factor()
+yesorno<-c("yes","yes","no","yes","no")
+onefactor<-factor(yesorno)
+onefactor
+#使用levels強制yes、no的順序
+yesorno<-c("yes","yes","no","yes","no")
+twofactor<-factor(yesorno,level=c("yes","no"))
+twofactor
+#建立縮寫,labels()
+yesorno<-c("yes","yes","no","yes","no")
+threefactor<-factor(yesorno,levels=c("yes","no"),labels=c("Y","N"))
+threefactor
+```
+
+# 有序因子
+#### 1.ordered()
+#### 2.factor(),增加參數"ordered=TRUE"
+```{r}
+#依r語言元順序排序
+str<-c("A","B","A","C","D","B","D")
+strord<-ordered(str)
+strord
+#指定順序排序
+str<-c("A","B","A","C","D","B","D")
+str1ord<-factor(str,levels=c("D","C","B","A"),ordered=TRUE)
+str1ord
+#篩選str1ord中大於B的元素
+which(str1ord>"B")
+```
+
+
+#數據框
+```{r}
+#建立數據框
+a<-c("Kevin","Peter","Frank")
+b<-c("M","M","M")
+c<-c(170,169,175)
+dataf<-data.frame(a,b,c)
+dataf
+#改欄位名,names()
+names(dataf)<-c("Name","Gender","Height")
+dataf
+#取得數據框的值,ex:列出所有名字
+dataf[,"Name"]
+#取得數據框的值,ex:列出1號的資料
+dataf[1,]
+#取得指定以外的資料,ex:取得名字外的資料
+dataf[-1]
+#特殊字元$(方便讀取數據框欄名內的資料)
+dataf$Name
+#使用rbind()增加列資料
+datafr<-data.frame(a,b,c,stringsAsFactors = FALSE)
+datafr<-rbind(datafr,c("Selina","F",163))
+datafr
+#使用索引值增加數據框資料
+datafr[c("5","6"),]<-c("Hebe","Ella","M","M",161,163)
+datafr
+```
+
+
+# 串列
+```{r}
+#建立串列
+datafra<-list("aname","2016-2017",datafr)
+datafra
+#建立串列(含名稱)
+newdatafra<-list(everyname="aname",year="2016-2017",information=datafr)
+newdatafra
+#用$取得串列內物件元素內容
+newdatafra$information
+#使用"[]"取得串列
+datafra[1]
+#修改串列元素內容
+datafra[[2]]<-"2017-2018"
+datafra
+#修改串列內2個元素內容
+datafra[1:2]<-list("bname","2016-2017")
+datafra
+#增加元素
+datafra[4]<-list(c(25,45))
+datafra
+```
+
+# 句子的分離
+#### strsplit(句子," ")
+```{r}
+#以空格分離句子
+x <- c("Hello R World")
+strsplit(x," ")
+```
+
+# 修改字串的大小寫
+#### toupper()將字串改成大寫
+#### tolower()將字串改成小寫
+#### xvec<-c("Hello","R","World")
+```{r,include=FALSE}
+xvec<-c("Hello","R","World")
+```
+```{r}
+#大寫
+toupper(xvec)
+#小寫
+tolower(xvec)
+```
+
+
+# unique()函數
+#### Coffee和coffee會被視為不同字
+```{r}
+#處理資料不重複出現
+abc<-c(12,8,9,15,7,12)
+unique(abc)
+```
+
+
+# paste()函數
+#### 字串或單字連接成句子
+```{r}
+#字串連接成句子
+hello<-c("hello","world","!")
+paste(hello,collapse = " ")
+#字串依符號連接
+paste(hello,collapse = "-")
+#連接兩個向量
+str<-c("a","b","c")
+str1<-1:3
+#一個一個引號刮起來
+paste(str,str1,sep="")
+#字串間引號拿掉
+paste(str,str1,sep="",collapse = " ")
+```
+
+
+# 字串資料的排序
+#### 使用sort()函數,預設是由小排到大,小寫在前大寫在後
+```{r}
+#字串向量排序
+coffee<-c("Boiling","coffee","brings","out","a","bitterly","taste")
+sort(coffee)
+#字串向量排序(由大到小)
+coffee<-c("Boiling","coffee","brings","out","a","bitterly","taste")
+sort(coffee,decreasing=TRUE)
+```
+
+
+# 函數
+### 函數格式:
+#### 函數名稱<-function(參數1,參數2,...){
+####  程式碼
+####  程式碼
+####  ...
+#### }
+```{r}
+# 設立比例轉成percent的函數
+da<-function(x){
+  x.percent<-round(x*100,digits=2)
+  x.final<-paste(x.percent,sep="","%")
+  return(x.final)
+}
+# 執行結果
+newda<-c(0.95,0.81,0.62)
+da(newda)
+#程式碼簡,執行使用print(),省略return
+ca<-function(x){
+  x.percent<-round(x*100,digits=2)
+  x.final<-paste(x.percent,sep="","%")
+}
+print(ca(newda))
+#省略函數大括號
+#1.平方數
+aaa<-function(x)x*x
+num<-c(5,9,11)
+aaa(num)
+#2.比例轉成percent
+bbb<-function(x)paste(round(x*100,digits=2),sep="","%")
+bbb(newda)
+#2個參數的函數,function(x,y)
+newdat<-c(0.9517,0.8652)
+ba<-function(x,x.digits){
+  x.percent<-round(x*100,digits = x.digits)     #執行轉換
+  paste(x.percent,sep="","%")    #加上百分百輸出
+}
+ba(newdat,1)   #ba(資料,小數點位數)
+#預設轉換到小數第0位
+aa<-function(x,x.digits){
+  x.percent<-round(x*100,digits = x.digits)     #執行轉換
+  paste(x.percent,sep="","%")    #加上百分百輸出
+}
+aa(newdat)
+```
+
+
+# if敘述
+### 一種條件
+#### if(邏輯運算式){
+#### 系列運算指令A
+#### }else{
+#### 系列運算指令B
+#### }
+### 多種條件
+#### if(邏輯運算式A){
+#### 系列運算指令A
+#### ...
+#### }else if(邏輯運算式B){
+#### 系統運算指令B
+#### ...
+#### }else if(邏輯運算式n){
+#### 系列運算指令n
+#### ...
+#### }else{
+#### 系列其他運算指令
+#### ...
+#### }
+```{r}
+#鼓勵節約能源實例
+elec<-function(deg,unitprice=50){
+  if(deg>120)                     #使用超過120度   
+    net.price<-deg*unitprice*1.15   #電費加收15%
+  else if(deg<80)                 #少於80度
+    net.price<-deg*unitprice*0.85   #少收15%
+  else                            #其他
+    net.price<-deg*unitprice        #正常收費
+  round(net.price)                #電費取整數
+}
+elec(deg = 75)
+```
+
+
+# switch敘述
+#### 取代if...elseif
+```{r}
+#以上一題為例
+elect<-function(deg,unitprice=50){
+  if(deg>120) index<-1
+  if(deg<=120 & deg>=80) index<-2
+  if(deg<80) index<-3
+  switch(index,
+         net.price<-deg*unitprice*1.15,     #電費加收15%
+         net.price<-deg*unitprice,          #正常收費
+         net.price<-deg*unitprice*0.85)     #電費減免15%
+  round(net.price)
+}
+elect(deg=75)
+```
+
+
+# for敘述
+### 單一運算指令
+#### for(迴圈索引in區間)
+### 多個運算指令
+#### for(迴圈索引in區間){
+#### 系統運算指令
+#### ...
+#### }
+```{r}
+#計算1到n總和
+total<-function(n){
+  sunx<-0    #從0開始加總
+  for(i in n) sunx<-sunx+i   #總和加上最新數
+  print(sunx)
+}
+total(1:10)
+```
+
+
+# while敘述
+### 格式:
+#### while(邏輯運算式){
+#### 系列運算指令
+#### ...
+#### }
+#### 如果邏輯運算式=TRUE,那麼迴圈將會持續進行,直到FALSE為止
+```{r}
+total2<-function(x){
+  sumx<-0
+  while(x>=0)     #如果x>0進入迴圈
+  {
+    sumx<-sumx+x   #加總
+    x<-x-1         #一直到0為止
+  }
+   return(sumx)
+}
+total2(10)
+```
+
+# repeat迴圈
+### 格式:
+#### repeat
+#### {
+#### 單一或系列運算指令
+#### if (邏輯運算式) break
+#### 其它運算指令
+#### }
+#### 若if的邏輯運算式為TRUE,則執行break指令,跳出迴圈
+```{r}
+total3<-function(x){
+  sumx<-0
+  repeat
+  {
+    sumx<-sumx+x
+    if(x==0)break
+    x<-x-1
+  }
+   return(sumx)
+}
+total3(10)
+```
+
+
+# break敘述
+#### 使用while迴圈,配合break敘述,計算0到n-1之總和
+```{r}
+total4<-function(x){
+  sumx<-0
+  i<-0
+  while(i<=x)
+  {
+    if(i==x) break
+    sumx<-sumx+i
+    i<-i+1
+  }
+   return(sumx)
+}
+total4(10)   #1加到9的總和
+```
+
+
+# next敘述
+#### 跳過目前指令,到下個指令
+```{r}
+#計算1到n之偶數總和
+total5<-function(n){
+  sumx<-0
+  for(i in n)
+  {
+    if(i %% 2 != 0) next   #若除以2不能整除跳過迴圈
+    sumx<-sumx+i
+  }
+   print(sumx)
+}
+total5(1:10)
+```
+
+
+# 資料夾
+### getwd()函數:獲得目前的工作目錄
+### setwd()函數:更改目前的工作目錄
+### file.exist()函數:檢查檔案是否存在
+### file.rename()函數:更改檔案名稱
+### file.create()函數:建立檔案
+### file.copy()函數:檔案拷貝
+### file.remove()函數:刪除指定的檔案
+
+
+# 資料輸出cat()函數
+```{r}
+#使用cat()執行基本的螢幕輸出
+samp<-function( ){
+  cat("R language")
+  cat("\n")     #換列列印
+  cat("A road to Big Data\n")
+  x<-10
+  y<-20
+  cat(x,y,"\n")    #預設是空一格
+  cat(x,y,x+y,sep="   ")   #增加空的格數
+  cat("\n")
+  cat(x,y,"x+y=",x+y)
+}
+samp()
+```
+
+
+# 隨機抽樣
+### sample(x,size,replace=FALSE,prob=NULL)
+#### x:這是個向量,代表隨機數樣本的範圍
+#### size:是個正整數,代表取隨機樣本的數量
+#### replace:預設FALSE,TRUE為取後放回
+#### prob:控制抽中的權重
+```{r}
+#樸克牌
+#建立一個樸克牌向量
+cardsuit<-c("spades","heart","diamonds","clubs")
+cardnum<-c("A",2:10,"J","Q","K")
+deck<-paste(rep(cardsuit,each=13),cardnum)
+#洗牌
+sample(deck,52)    #每次執行會有不同的結果
+#骰子(取後放回)
+#擲12次骰子
+sample(1:6,12,replace = TRUE)
+#加入權重
+#擲骰子時設1和6有5倍權重被抽中
+sample(1:6,12,replace=TRUE,c(5,1,1,1,1,5))
+```
+
+
+# 基本圖形
+### 直方圖[hist()]
+#### main:圖表標題
+#### xlab:x軸標題
+#### ylab:y軸標題
+#### breaks:柱狀數量
+```{r}
+#繪製澳洲螃蟹甲殼寬度的直方圖
+library(MASS)   #使用MASS套件內的物件
+hist(crabs$CW,col="Gray",main="Histogram of Crab",xlab="Carapace width",ylab="Counter")
+```
+
+### 繪製時間數列物件
+#### plot(x,y,...)
+#### type:p為點,l為線,b為點和線,o為重疊,h為垂直線型,s為階梯型
+```{r}
+library(ggplot2) 
+#五大城市的兒童犯罪率
+#先建立數據框
+NTPCtotal=c(173,124,95,110,81,71,53)
+TPEtotal=c(46,41,26,49,44,38,55)
+TYNtotal=c(39,55,47,36,22,25,25)
+TXGtotal=c(66,71,66,33,37,52,31)
+TNNtotal=c(27,19,46,27,29,24,31)
+KHHtotal=c(66,42,66,40,49,42,39)
+total=c(NTPCtotal,TPEtotal,TYNtotal,TXGtotal,TNNtotal,KHHtotal)
+date<-data.frame(year=rep(c(2012,2013,2014,2015,2016,2017,2018),6),city=c(rep("NTPC",7),rep("TPE",7),rep("TYN",7),rep("TXG",7),rep("TNN",7),rep("KHH",7)),total=total)
+date     
+#再畫圖
+ggplot(date,aes(x=year,y=total,linetype=city,color=city))+
+  geom_line()+
+  geom_point()+
+  labs(title = "suspects of children in 2018")+
+  scale_color_discrete(breaks = c("NTPC","TPE","TYN","TXG","TNN","KHH"))   #更改圖例順序
+```
+
+### 畫兩物件的數據關係圖
+#### pch設定點的形狀(預設為空心圓):
+#### pch=19:實心圓
+#### pch=20:小一點的實心圓
+#### pch=21:空心圓
+#### pch=22:空心正方形
+#### pch=23:空心菱形
+#### pch=24:空心箭頭向上三角形
+#### pch=25:空心箭頭向下三角形
+```{r}
+#crabs物件的前額葉長度和甲殼寬度的數據關係圖
+#空心圓
+plot(crabs$CW,crabs$FL)
+#空心正方形
+plot(crabs$CW,crabs$FL,pch=22)
+```
+
+
